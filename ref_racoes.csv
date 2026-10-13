@@ -1,0 +1,8 @@
+especie,produto,fabricante,indicacao,para_castrados,kcal_kg,umidade_max_pct,link,fonte
+Canina,GoldeN Formula Caes Adultos Frango & Arroz,PremieRpet,adulto,N,3713,10.0,https://premierpet.com.br/produto/golden-formula-caes-adultos-frango-arroz/,niveis de garantia no site oficial do fabricante (energia metabolizavel)
+Canina,Medium Adult,Royal Canin,adulto porte medio,N,3588,11.5,https://www.royalcanin.com/br/dogs/products/retail-products/medium-adult-3004,niveis de garantia no site oficial do fabricante (energia metabolizavel)
+Canina,Shih Tzu Adult,Royal Canin,adulto Shih Tzu,N,3961,11.0,https://www.royalcanin.com/br/dogs/products/retail-products/shih-tzu-adult-2200,niveis de garantia no site oficial do fabricante (energia metabolizavel)
+Felina,Whiskas Carne Gatos Adultos,Mars (Whiskas),adulto,N,3730,12.0,https://www.whiskas.com.br/products/seca/racao-whiskas-carne-gatos-adultos,niveis de garantia no site oficial do fabricante (energia metabolizavel)
+Felina,Whiskas Carne Gatos Adultos Castrados,Mars (Whiskas),adulto castrado,S,3740,12.0,https://www.whiskas.com.br/products/seca/racao-whiskas-carne-gatos-adultos-castrados,niveis de garantia no site oficial do fabricante (energia metabolizavel)
+Felina,GoldeN Gatos Adultos Frango,PremieRpet,adulto,N,3912,10.0,https://premierpet.com.br/produto/golden-gatos-adultos-frango/,niveis de garantia no site oficial do fabricante (energia metabolizavel)
+Felina,GoldeN Gatos Castrados Frango,PremieRpet,adulto castrado,S,3800,10.0,https://premierpet.com.br/produto/golden-gatos-castrados-frango/,niveis de garantia no site oficial do fabricante (energia metabolizavel)

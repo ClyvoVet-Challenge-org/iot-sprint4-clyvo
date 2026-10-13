@@ -1,0 +1,58 @@
+especie,raca,doenca,tipo,razao_risco,medida,observacao,fonte,link
+Canina,Labrador Retriever,Artrose,predisposicao,2.56,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Labrador Retriever,Obesidade,predisposicao,1.7,OR vs SRD,valor lido na Figura 3 do artigo,"Pegram et al. (2021) J Small Anim Pract - sobrepeso, VetCompass",https://doi.org/10.1111/jsap.13325
+Canina,Labrador Retriever,Hipotireoidismo,predisposicao,1.4,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Labrador Retriever,Doença degenerativa da válvula mitral,protecao,0.4,OR vs SRD,,"Mattin et al. (2015) J Vet Intern Med 29:847-854 - doenca degenerativa da valvula mitral, VetCompass",https://doi.org/10.1111/jvim.12591
+Canina,Labrador Retriever,Síndrome de Cushing,protecao,0.3,OR vs SRD,,"Schofield et al. (2022) J Small Anim Pract - sindrome de Cushing, VetCompass",https://doi.org/10.1111/jsap.13450
+Canina,Golden Retriever,Hipotireoidismo,predisposicao,4.36,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Golden Retriever,Obesidade,predisposicao,2.58,OR vs SRD,,"Pegram et al. (2021) J Small Anim Pract - sobrepeso, VetCompass",https://doi.org/10.1111/jsap.13325
+Canina,Golden Retriever,Artrose,predisposicao,2.42,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Golden Retriever,Síndrome de Cushing,protecao,0.24,OR vs SRD,,"Schofield et al. (2022) J Small Anim Pract - sindrome de Cushing, VetCompass",https://doi.org/10.1111/jsap.13450
+Canina,Pastor Alemão,Artrose,predisposicao,2.28,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Pastor Alemão,Hipotireoidismo,predisposicao,1.51,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Pastor Alemão,Obesidade,protecao,0.55,OR vs SRD,,"Pegram et al. (2021) J Small Anim Pract - sobrepeso, VetCompass",https://doi.org/10.1111/jsap.13325
+Canina,Rottweiler,Artrose,predisposicao,3.11,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Rottweiler,Hipotireoidismo,predisposicao,1.64,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Border Collie,Doença degenerativa da válvula mitral,predisposicao,2.02,OR vs SRD,,"Mattin et al. (2015) J Vet Intern Med 29:847-854 - doenca degenerativa da valvula mitral, VetCompass",https://doi.org/10.1111/jvim.12591
+Canina,Border Collie,Artrose,predisposicao,1.51,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Border Collie,Síndrome de Cushing,protecao,0.32,OR vs SRD,,"Schofield et al. (2022) J Small Anim Pract - sindrome de Cushing, VetCompass",https://doi.org/10.1111/jsap.13450
+Canina,Husky Siberiano,Hipotireoidismo,predisposicao,2.53,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Spitz Alemão,Hipotireoidismo,predisposicao,2.85,OR vs SRD,estudo usa o nome Pomeranian,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Poodle Standard,Hipoadrenocorticismo (Addison),predisposicao,51.38,OR vs SRD,,"Schofield et al. (2021) J Small Anim Pract 62:343-350 - hipoadrenocorticismo (Addison), VetCompass",https://doi.org/10.1111/jsap.13285
+Canina,Lhasa Apso,Síndrome de Cushing,predisposicao,2.52,OR vs SRD,,"Schofield et al. (2022) J Small Anim Pract - sindrome de Cushing, VetCompass",https://doi.org/10.1111/jsap.13450
+Canina,Lhasa Apso,Artrose,protecao,0.58,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Lhasa Apso,Hipotireoidismo,protecao,0.44,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Shih Tzu,Doença degenerativa da válvula mitral,predisposicao,2.89,OR vs SRD,,"Mattin et al. (2015) J Vet Intern Med 29:847-854 - doenca degenerativa da valvula mitral, VetCompass",https://doi.org/10.1111/jvim.12591
+Canina,Shih Tzu,Artrose,protecao,0.47,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Shih Tzu,Obesidade,protecao,0.53,OR vs SRD,,"Pegram et al. (2021) J Small Anim Pract - sobrepeso, VetCompass",https://doi.org/10.1111/jsap.13325
+Canina,Shih Tzu,Hipotireoidismo,protecao,0.38,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Pug,Obesidade,predisposicao,3.12,OR vs SRD,,"Pegram et al. (2021) J Small Anim Pract - sobrepeso, VetCompass",https://doi.org/10.1111/jsap.13325
+Canina,Pug,Hipotireoidismo,protecao,0.29,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Schnauzer Miniatura,Síndrome de Cushing,predisposicao,3.05,OR vs SRD,,"Schofield et al. (2022) J Small Anim Pract - sindrome de Cushing, VetCompass",https://doi.org/10.1111/jsap.13450
+Canina,Schnauzer Miniatura,Hipotireoidismo,predisposicao,3.03,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Schnauzer Miniatura,Artrose,protecao,0.55,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Cocker Spaniel Inglês,Hipotireoidismo,predisposicao,2.1,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Cocker Spaniel Inglês,Obesidade,predisposicao,1.32,OR vs SRD,valor lido na Figura 3; estudo usa o nome Cocker Spaniel,"Pegram et al. (2021) J Small Anim Pract - sobrepeso, VetCompass",https://doi.org/10.1111/jsap.13325
+Canina,Cocker Spaniel Inglês,Artrose,protecao,0.7,OR vs SRD,estudo usa o nome Cocker Spaniel,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Cocker Spaniel Inglês,Síndrome de Cushing,protecao,0.44,OR vs SRD,estudo usa o nome Cocker Spaniel,"Schofield et al. (2022) J Small Anim Pract - sindrome de Cushing, VetCompass",https://doi.org/10.1111/jsap.13450
+Canina,Cavalier King Charles Spaniel,Doença degenerativa da válvula mitral,predisposicao,47.37,OR vs SRD,,"Mattin et al. (2015) J Vet Intern Med 29:847-854 - doenca degenerativa da valvula mitral, VetCompass",https://doi.org/10.1111/jvim.12591
+Canina,Cavalier King Charles Spaniel,Obesidade,predisposicao,1.5,OR vs SRD,valor lido na Figura 3 do artigo,"Pegram et al. (2021) J Small Anim Pract - sobrepeso, VetCompass",https://doi.org/10.1111/jsap.13325
+Canina,Cavalier King Charles Spaniel,Hipotireoidismo,protecao,0.45,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,West Highland White Terrier,Hipoadrenocorticismo (Addison),predisposicao,5.84,OR vs SRD,,"Schofield et al. (2021) J Small Anim Pract 62:343-350 - hipoadrenocorticismo (Addison), VetCompass",https://doi.org/10.1111/jsap.13285
+Canina,West Highland White Terrier,Artrose,protecao,0.66,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,West Highland White Terrier,Hipotireoidismo,protecao,0.4,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Border Terrier,Síndrome de Cushing,predisposicao,5.4,OR vs SRD,,"Schofield et al. (2022) J Small Anim Pract - sindrome de Cushing, VetCompass",https://doi.org/10.1111/jsap.13450
+Canina,Border Terrier,Hipotireoidismo,predisposicao,1.86,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Canina,Border Terrier,Obesidade,predisposicao,1.72,OR vs SRD,valor lido na Figura 3 do artigo,"Pegram et al. (2021) J Small Anim Pract - sobrepeso, VetCompass",https://doi.org/10.1111/jsap.13325
+Canina,Border Terrier,Artrose,protecao,0.53,OR vs SRD,,"Anderson et al. (2018) Sci Rep 8:5641 - osteoartrite apendicular, VetCompass",https://doi.org/10.1038/s41598-018-23940-z
+Canina,Staffordshire Bull Terrier,Síndrome de Cushing,predisposicao,1.52,OR vs SRD,,"Schofield et al. (2022) J Small Anim Pract - sindrome de Cushing, VetCompass",https://doi.org/10.1111/jsap.13450
+Canina,Shar-Pei,Hipotireoidismo,predisposicao,2.8,OR vs SRD,,"O'Neill et al. (2022) Canine Med Genet 9:11 - hipotireoidismo, VetCompass",https://doi.org/10.1186/s40575-022-00123-8
+Felina,Persa,Doença renal policística,predisposicao,,mutacao genetica da raca,"mutacao PKD1 presente na raca; no Reino Unido a frequencia do gene em Persas caiu de ~28% (2005) para ~2% (2016) com testes geneticos; doenca renal em geral foi a principal causa de morte em Persas: 23,4% vs 13,6% dos gatos em geral (O'Neill et al. 2019, Sci Rep)",Lyons et al. (2004) J Am Soc Nephrol 15:2548-55 - mutacao PKD1; OMIA 000807-9685,https://www.omia.org/OMIA000807/9685/
+Felina,Persa,Diabetes mellitus,protecao,,,"menor incidencia que outras racas, mantida apos ajuste por idade (grupo Persa/Exotico)",Ohlund et al. (2015) J Vet Intern Med 29:1342-1347 - diabetes em gatos segurados na Suecia,https://doi.org/10.1111/jvim.13584
+Felina,Exótico,Doença renal policística,predisposicao,,mutacao genetica da raca,mutacao PKD1 presente na raca,Lyons et al. (2004) J Am Soc Nephrol 15:2548-55 - mutacao PKD1; OMIA 000807-9685,https://www.omia.org/OMIA000807/9685/
+Felina,Exótico,Diabetes mellitus,protecao,,,"menor incidencia que outras racas, mantida apos ajuste por idade (grupo Persa/Exotico)",Ohlund et al. (2015) J Vet Intern Med 29:1342-1347 - diabetes em gatos segurados na Suecia,https://doi.org/10.1111/jvim.13584
+Felina,Maine Coon,Cardiomiopatia hipertrófica,predisposicao,,mutacao genetica da raca,mutacao MYBPC3 A31P,Meurs et al. (2005) Hum Mol Genet - mutacao MYBPC3 A31P no Maine Coon; OMIA 000515-9685,https://www.omia.org/OMIA000515/9685/
+Felina,Ragdoll,Cardiomiopatia hipertrófica,predisposicao,,mutacao genetica da raca,mutacao MYBPC3 R820W,Meurs et al. (2007) Genomics - mutacao MYBPC3 R820W no Ragdoll; OMIA 000515-9685,https://www.omia.org/OMIA000515/9685/
+Felina,Ragdoll,Diabetes mellitus,protecao,0.11,OR vs SRD,,"Waite et al. (2025) J Vet Intern Med 39(4) - diabetes em 1.225.130 gatos, VetCompass",https://academic.oup.com/jvim/article/39/4/jvim70161/8492752
+Felina,Azul Russo,Diabetes mellitus,predisposicao,3.8,IRR vs outras racas,,Ohlund et al. (2015) J Vet Intern Med 29:1342-1347 - diabetes em gatos segurados na Suecia,https://doi.org/10.1111/jvim.13584
+Felina,Norueguês da Floresta,Diabetes mellitus,predisposicao,1.9,IRR vs outras racas,,Ohlund et al. (2015) J Vet Intern Med 29:1342-1347 - diabetes em gatos segurados na Suecia,https://doi.org/10.1111/jvim.13584
