@@ -1,7 +1,5 @@
 -- ============================================================================
---  Script 03: População do banco (gerado por gerar_populacao.py)
---  Dados de pacientes SIMULADOS. Data de referência: 2026-10-04 | semente: 42
---  Ordem de execução: 01 -> 02 -> 03
+--  Script 03: População do banco
 -- ============================================================================
 SET DEFINE OFF;
 SET FEEDBACK OFF;
