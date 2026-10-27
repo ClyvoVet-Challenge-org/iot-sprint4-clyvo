@@ -477,7 +477,7 @@ O mesmo resultado aparece para dois públicos: a **clínica** vê a explicação
 | Aspecto | Nesta entrega | Em produção |
 |---|---|---|
 | Leituras do sensor | Simuladas no banco, no formato do ESP32 (e recebidas pela API) | Enviadas todo dia pelo ESP32 |
-| Dados de pacientes | Simulados (500 animais) | Cadastrados pelas clínicas parceiras |
+| Dados de pacientes | Simulados (500 animais), carregados pelo script `03_clyvo_populacao.sql` | Cadastrados pelas clínicas no sistema principal da Clyvo (Java), nas mesmas tabelas que a IA lê |
 | Treino do Vigia B | Dataset simulado, com o gabarito vindo das referências veterinárias | Novo treino com casos reais avaliados por veterinários |
 | Limites do Vigia C | z ≥ 2 (contagiosa) e z ≥ 3 (não contagiosa), janela de 14 dias | Ajustados com o histórico real de cada região |
 | Envio ao responsável | Mensagem gerada e exibida (`st_notificacao = 'SIMULADO'`) | WhatsApp API, com reagendamento pela mensagem |
