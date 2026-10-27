@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo"><h1>Clyvo Vet</h1><span class="selo">IA</span></div>
+<p class="subtitulo">Painel da clínica · monitoramento contínuo dos pacientes</p>
+{% if msg %}<div class="faixa-aviso sucesso">✔ {{ msg }}</div>{% endif %}
+
+<div class="numeros">
+  <a class="numero alto" href="/pacientes?nivel=ALTO"><strong>{{ resumo.ALTO }}</strong><span>risco alto</span></a>
+  <a class="numero medio" href="/pacientes?nivel=MEDIO"><strong>{{ resumo.MEDIO }}</strong><span>risco médio</span></a>
+  <a class="numero regiao" href="/regional"><strong>{{ resumo.surtos + resumo.preventivos }}</strong><span>alertas regionais</span></a>
+</div>
+
+<h2>Alertas de saúde local</h2>
+{% for r in regionais %}{% include "_regional.html" %}{% else %}<div class="card vazio">Nenhum alerta regional ativo.</div>{% endfor %}
+
+<h2>Pacientes que precisam de atenção</h2>
+{% for a in em_risco %}{% include "_paciente.html" %}{% endfor %}
+<a class="botao contorno" href="/pacientes">Ver todos os pacientes</a>
+
+<form method="post" action="/atualizar"><button class="botao" type="submit">↻ Executar a IA novamente</button></form>
+<p class="rodape">{{ resumo.avaliados }} de {{ resumo.total }} animais avaliados pelo Vigia B · {{ resumo.fora }} filhotes ou SRD acompanhados pelo Vigia C · <a href="/pacientes?nivel=rotina">{{ resumo.rotina }} com check-up atrasado</a></p>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo"><h1>Clyvo Vet</h1></div>
+<div class="card">
+  <div class="faixa-aviso erro">Não foi possível executar a IA com os dados do banco.</div>
+  <p>Confira se o arquivo <code>app/.env</code> está preenchido com o usuário, a senha e o endereço do Oracle, e se os scripts 01, 02 e 03 da pasta <code>banco/</code> foram executados.</p>
+  <p style="color:var(--cinza);font-size:13px">Detalhe: {{ erro }}</p>
+  <form method="post" action="/atualizar"><button class="botao" type="submit">Tentar novamente</button></form>
+</div>
+{% endblock %}

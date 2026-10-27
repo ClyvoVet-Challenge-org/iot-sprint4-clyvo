@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo"><h1>WhatsApp</h1><span class="selo">envio simulado</span></div>
+<p class="visao">📱 O que cada responsável recebe</p>
+<div class="faixa-aviso info" style="font-weight:400;display:block">
+  Cada conversa é com um tutor e mostra só as mensagens dos animais dele.
+  Os <b>alertas sanitários</b> (Vigia C) vão para todos os tutores do bairro, por lista de transmissão.
+</div>
+
+<div class="filtros">
+  {% for chave, nome in [('todas', 'Todas (' ~ total ~ ')'), ('sanitario', '🚨 Sanitários (' ~ contagem.sanitario ~ ')'), ('saude', '🐾 Saúde (' ~ contagem.saude ~ ')'), ('checkup', '📅 Check-up (' ~ contagem.checkup ~ ')')] %}
+  <a href="/whatsapp?tipo={{ chave }}" class="{{ 'ativo' if tipo == chave }}">{{ nome }}</a>
+  {% endfor %}
+</div>
+
+<div class="legenda">
+  <span><b>🚨 Sanitário:</b> aumento de casos no bairro (Vigia C)</span>
+  <span><b>🐾 Saúde:</b> risco alto ou médio do animal (Vigia B)</span>
+  <span><b>📅 Check-up:</b> mais de 1 ano sem consulta (correlação 9)</span>
+</div>
+
+<div class="card" style="padding:4px 16px">
+{% for c in conversas %}
+  <a class="linha conversa" href="{{ c.link }}" style="color:inherit">
+    <div class="icone {{ {'sanitario':'vermelho','saude':'laranja','checkup':'azul'}[c.tipo] }}">{{ {'sanitario':'🚨','saude':'🐾','checkup':'📅'}[c.tipo] }}</div>
+    <div class="texto">
+      <div class="conversa-topo"><b>{{ c.nome }}</b>
+        <span class="etiqueta {{ c.tipo }}">{% if c.tipo == 'sanitario' %}Sanitário{% if c.nivel == 'BAIXO' %} · preventivo{% endif %}{% elif c.tipo == 'saude' %}Saúde · {{ 'MÉDIO' if c.nivel == 'MEDIO' else c.nivel }}{% else %}Check-up{% endif %}</span></div>
+      <small>{{ c.detalhe }}</small>
+      <small class="previa">{{ c.previa }}</small>
+    </div>
+  </a>
+{% else %}
+  <div class="vazio">Nenhuma conversa neste filtro.</div>
+{% endfor %}
+</div>
+{% endblock %}

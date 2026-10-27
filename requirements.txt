@@ -1,0 +1,12 @@
+pandas
+numpy
+scikit-learn==1.6.1
+joblib
+matplotlib
+jupyter
+oracledb
+fastapi
+uvicorn
+jinja2
+python-multipart
+python-dotenv

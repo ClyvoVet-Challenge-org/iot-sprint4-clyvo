@@ -1,0 +1,11 @@
+<a class="card card-link" href="/animal/{{ a.id_animal }}">
+  <div class="linha" style="border:0;padding:0">
+    <div class="icone {{ {'ALTO':'vermelho','MEDIO':'laranja','BAIXO':'verde'}.get(a.nivel, '') if a.avaliado }}">{{ '🐱' if a.especie == 'Felina' else '🐶' }}</div>
+    <div class="texto">
+      <strong>{{ a.nome }}</strong> · <span style="color:var(--cinza)">{{ a.raca }}, {{ a.idade|br }} anos</span>
+      <small>{% if a.avaliado %}{{ a.causa }}{% else %}{{ a.motivo_fora }}{% endif %}</small>
+    </div>
+    {% if a.avaliado %}<span class="nivel {{ a.nivel }}">{{ 'MÉDIO' if a.nivel == 'MEDIO' else a.nivel }}</span>
+    {% else %}<span class="nivel fora">fora do B</span>{% endif %}
+  </div>
+</a>

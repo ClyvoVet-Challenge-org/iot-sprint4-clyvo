@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo"><h1>Regiões</h1></div>
+<p class="subtitulo">Vigia C · diagnósticos dos últimos 14 dias comparados com o histórico de cada bairro</p>
+{% if msg %}<div class="faixa-aviso sucesso">✔ {{ msg }}</div>{% endif %}
+{% for r in regionais %}{% include "_regional.html" %}{% else %}<div class="card vazio">Nenhum alerta regional ativo.</div>{% endfor %}
+<a class="botao contorno" href="/diagnostico">➕ Registrar um diagnóstico</a>
+{% endblock %}

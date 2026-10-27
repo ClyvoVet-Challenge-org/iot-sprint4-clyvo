@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo"><h1>Registrar diagnóstico</h1></div>
+<p class="subtitulo">O diagnóstico é gravado no Oracle e a IA é executada de novo na hora.</p>
+<div class="faixa-aviso info" style="font-weight:400;font-size:13px;display:block">🧪 Só para teste: em uso real, a clínica registra o diagnóstico no sistema principal da Clyvo (Java).</div>
+{% if erro %}<div class="faixa-aviso erro">{{ erro }}</div>{% endif %}
+<form class="card" method="post" action="/diagnostico">
+  <label for="animal">Animal</label>
+  <select id="animal" name="id_animal" required>
+    {% for a in animais %}<option value="{{ a.id_animal }}" data-especie="{{ a.especie }}">{{ local(a.bairro) }} · {{ a.nome }} ({{ a.raca }})</option>{% endfor %}
+  </select>
+  <label for="doenca">Doença diagnosticada</label>
+  <select id="doenca" name="id_doenca" required>
+    {% for d in doencas %}<option value="{{ d.id_doenca }}" data-especie="{{ d.especie_alvo }}">{{ d.nm_doenca }} ({{ 'cão' if d.especie_alvo == 'Canina' else 'gato' }})</option>{% endfor %}
+  </select>
+  <label for="data">Data da consulta</label>
+  <input id="data" type="date" name="data_consulta" value="{{ hoje.isoformat() }}" max="{{ hoje.isoformat() }}" required>
+  <button class="botao" type="submit">Registrar e executar a IA</button>
+</form>
+<div class="faixa-aviso info">💡 Exemplo para a demonstração: registre parvovirose em um cão de Pinheiros. O bairro já tem 1 caso nos últimos 14 dias; com o segundo, o Vigia C passa a indicar aumento de casos.</div>
+<form method="post" action="/diagnostico/limpar"><button class="botao contorno pequeno" type="submit">Remover os dados de demonstração (diagnósticos e leituras)</button></form>
+<script>
+  const animal = document.getElementById("animal"), doenca = document.getElementById("doenca");
+  function filtrar() {
+    const especie = animal.selectedOptions[0].dataset.especie;
+    let primeira = null;
+    for (const o of doenca.options) { o.hidden = o.dataset.especie !== especie; if (!o.hidden && !primeira) primeira = o; }
+    if (doenca.selectedOptions[0].hidden && primeira) primeira.selected = true;
+  }
+  animal.addEventListener("change", filtrar); filtrar();
+</script>
+{% endblock %}

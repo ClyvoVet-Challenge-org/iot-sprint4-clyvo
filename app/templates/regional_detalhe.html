@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo"><a class="voltar" href="/regional">←</a><div class="titulo-centro">Alerta Regional</div></div>
+<div class="card">
+  <p class="visao">🩺 Visão da clínica / veterinário</p>
+  <div class="alerta-topo {{ r.nivel_risco }}">
+    <div class="icone {{ 'vermelho' if r.nivel_risco == 'ALTO' else ('laranja' if r.nivel_risco == 'MEDIO' else 'amarelo') }}">{{ '⚠️' if r.caso_unico else '🦠' }}</div>
+    <div><h2>{% if r.caso_unico %}Suspeita de {{ r.doenca|lower }}{% elif r.nivel_risco == 'BAIXO' %}{{ r.doenca }}: alerta preventivo{% else %}{{ r.doenca }} em alta{% endif %}</h2>
+      <span class="nivel {{ r.nivel_risco }}">{{ 'MÉDIO' if r.nivel_risco == 'MEDIO' else r.nivel_risco }}</span>
+      {% if r.confirmado_if %}<span class="selo">✔ Confirmado pelo Isolation Forest</span>{% endif %}</div>
+  </div>
+  <div class="linha"><div class="icone">📍</div><div class="texto">Região: <b>{{ local(r.bairro) }}, {{ local(r.cidade) }}</b><small>{{ 'cães' if r.especie == 'Canina' else 'gatos' }}</small></div></div>
+  <div class="linha"><div class="icone">📅</div><div class="texto">Período analisado: últimos 14 dias<small>{{ r.inicio.strftime('%d/%m') }} a {{ r.fim.strftime('%d/%m/%Y') }}</small></div></div>
+  <div class="linha"><div class="icone">📊</div><div class="texto">Casos identificados: <b>{{ r.casos }}</b>
+    <small>{% if r.caso_unico %}raiva: 1 caso suspeito já gera alerta imediato{% else %}normal do bairro: {{ r.media_hist|br }} caso(s) a cada 14 dias · z-score {{ r.z|br }}{% endif %}</small></div></div>
+</div>
+
+<div class="card" style="background:var(--azul-claro)">
+  <div class="linha" style="border:0"><div class="icone" style="background:#fff">🏥</div>
+    <div class="texto" style="color:var(--azul)">Pacientes da clínica nessa região<br><strong style="font-size:30px">{{ r.pacientes_regiao }}</strong> cadastrados
+      <small>{{ r.vulneraveis|length }} sem a vacina em dia contra {{ r.doenca|lower }}</small></div></div>
+</div>
+
+<div class="card"><div class="linha" style="border:0"><div class="icone amarelo">💡</div>
+  <div class="texto"><b style="color:var(--azul)">Recomendação para a clínica</b><br>{{ r.recomendacao_clinica }}</div></div></div>
+
+{% if r.vulneraveis %}
+<h2>Avisar primeiro: sem vacina em dia</h2>
+<div class="card">
+{% for v in r.vulneraveis %}
+  <a class="linha" href="/animal/{{ v.id_animal }}" style="color:inherit"><div class="icone">{{ '🐱' if v.especie == 'Felina' else '🐶' }}</div>
+    <div class="texto"><b>{{ v.nm_animal }}</b>, {{ v.idade_anos|br }} anos<small>{{ v.situacao_vacinal }}</small></div><span class="seta">›</span></a>
+{% endfor %}
+</div>
+{% endif %}
+<a class="botao" href="/whatsapp/regional/{{ r.indice }}">📱 Ver a mensagem para os tutores do bairro</a>
+{% endblock %}

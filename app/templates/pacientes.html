@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo"><h1>Pacientes</h1></div>
+<div class="filtros">
+  {% for chave, nome in [('risco','Precisam de atenção'),('ALTO','Risco alto'),('MEDIO','Risco médio'),('BAIXO','Risco baixo'),('rotina','Check-up atrasado'),('fora','Filhotes e SRD'),('todos','Todos')] %}
+  <a href="/pacientes?nivel={{ chave }}" class="{{ 'ativo' if nivel == chave }}">{{ nome }}</a>
+  {% endfor %}
+</div>
+<p class="subtitulo" style="margin:4px 0 12px">{{ lista|length }} animais</p>
+{% for a in lista %}{% include "_paciente.html" %}{% else %}<div class="card vazio">Nenhum animal neste filtro.</div>{% endfor %}
+{% endblock %}

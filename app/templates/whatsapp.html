@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="zap">
+  <div class="zap-topo">
+    <a class="voltar" href="/whatsapp" style="font-size:24px">←</a>
+    <div class="zap-foto">{{ contato.icone }}</div>
+    <div><b>{{ contato.nome }}</b><small>{{ contato.detalhe }}</small></div>
+  </div>
+  <p class="visao" style="margin:12px 18px 0">📱 O que o responsável recebe · envio simulado</p>
+  <div class="zap-dia"><span>Hoje</span></div>
+  {% for m in mensagens %}
+    <p class="zap-para">{{ {'sanitario':'🚨 Alerta sanitário do bairro (Vigia C)','saude':'🐾 Alerta de saúde do animal (Vigia B)','checkup':'📅 Lembrete de check-up (correlação 9)'}[m.tipo] }}</p>
+    <div class="bolha">
+      <h4>{{ m.titulo }}</h4>
+      <p>{{ m.texto }}</p>
+      <div class="hora">09:15</div>
+      <span class="acao">🔗 {{ m.botao }}</span>
+    </div>
+  {% else %}
+    <p class="zap-para">Nenhuma mensagem: os animais deste tutor estão sem alertas no momento.</p>
+  {% endfor %}
+</div>
+{% endblock %}

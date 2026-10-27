@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clyvo Vet — IA</title>
+  <link rel="stylesheet" href="/static/clyvo.css">
+</head>
+<body>
+  <main class="app">
+    {% block conteudo %}{% endblock %}
+    <p class="rodape">Clyvo Vet · Vigia B (Random Forest) e Vigia C (z-score + Isolation Forest) · dados de {{ data_ref().strftime('%d/%m/%Y') }}</p>
+  </main>
+  <nav class="nav">
+    <a href="/" class="{{ 'ativo' if aba == 'inicio' }}"><span>🏠</span>Início</a>
+    <a href="/pacientes" class="{{ 'ativo' if aba == 'pacientes' }}"><span>🐾</span>Pacientes</a>
+    <a href="/regional" class="{{ 'ativo' if aba == 'regional' }}"><span>📍</span>Regiões</a>
+    <a href="/whatsapp" class="{{ 'ativo' if aba == 'whatsapp' }}"><span>💬</span>WhatsApp</a>
+    <a href="/diagnostico" class="{{ 'ativo' if aba == 'diagnostico' }}"><span>➕</span>Registrar</a>
+  </nav>
+</body>
+</html>

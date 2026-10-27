@@ -1,0 +1,13 @@
+<a class="card card-link" href="/regional/{{ r.indice }}">
+  <div class="linha" style="border:0;padding:0">
+    <div class="icone {{ 'vermelho' if r.nivel_risco == 'ALTO' else ('laranja' if r.nivel_risco == 'MEDIO' else 'amarelo') }}">{{ '🦠' if not r.caso_unico else '⚠️' }}</div>
+    <div class="texto">
+      <strong>{{ r.doenca }}</strong> · <span style="color:var(--cinza)">{{ local(r.bairro) }}</span>
+      <small>{% if r.caso_unico %}Caso único suspeito · {{ 'cães' if r.especie == 'Canina' else 'gatos' }} do bairro
+             {% elif r.nivel_risco == 'BAIXO' %}Preventivo: época de pico · {{ r.casos }} caso(s)
+             {% else %}{{ r.casos }} casos em 14 dias · normal: {{ r.media_hist|br }}{% endif %}
+             {% if r.confirmado_if %} · ✔ Isolation Forest{% endif %}</small>
+    </div>
+    <span class="nivel {{ r.nivel_risco }}">{{ 'MÉDIO' if r.nivel_risco == 'MEDIO' else r.nivel_risco }}</span>
+  </div>
+</a>

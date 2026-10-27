@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% macro variacao(razao, referencia, limite=0.05) -%}
+{% if razao > 1 + limite %}{{ pct(razao) }}% acima {{ referencia }}{% elif razao < 1 - limite %}{{ pct(razao) }}% abaixo {{ referencia }}{% else %}dentro {{ referencia }}{% endif %}
+{%- endmacro %}
+{# mudança de mais de 20% em 14 dias, o mesmo limite da correlação 7 #}
+{% macro tendencia(tend, valores, unidade) -%}
+{% if tend > 0.2 %}em alta em 14 dias (de {{ valores[0]|br(0) }} para {{ valores[1]|br(0) }}{{ unidade }}){% elif tend < -0.2 %}em queda em 14 dias (de {{ valores[0]|br(0) }} para {{ valores[1]|br(0) }}{{ unidade }}){% else %}estável em 14 dias{% endif %}
+{%- endmacro %}
+{% macro corr(texto) %}<span class="corr">{{ texto }}</span>{% endmacro %}
+{% block conteudo %}
+<div class="topo"><a class="voltar" href="/pacientes">←</a><div class="titulo-centro">Paciente</div></div>
+{% if msg %}<div class="faixa-aviso sucesso">✔ {{ msg }}</div>{% endif %}
+
+<div class="card">
+  <p class="visao">🩺 Visão da clínica / veterinário</p>
+  {% if a.avaliado %}
+  <div class="alerta-topo {{ a.nivel }}">
+    <div class="icone {{ {'ALTO':'vermelho','MEDIO':'laranja','BAIXO':'verde'}[a.nivel] }}">{{ '⚠️' if a.nivel != 'BAIXO' else '✅' }}</div>
+    <div><h2>Alerta Individual — Risco {{ {'ALTO':'Alto','MEDIO':'Médio','BAIXO':'Baixo'}[a.nivel] }}</h2>
+      <small style="color:var(--cinza)">Vigia B · confiança do modelo: {{ (a.confianca * 100)|round|int }}%</small></div>
+  </div>
+  {% else %}
+  <div class="alerta-topo"><div class="icone">ℹ️</div><div><h2 style="color:var(--azul)">Acompanhamento</h2>
+    <small style="color:var(--cinza)">{{ a.motivo_fora }}</small></div></div>
+  {% endif %}
+
+  <div class="perfil">
+    <div class="avatar">{{ '🐱' if a.especie == 'Felina' else '🐶' }}</div>
+    <div>
+      <h2>{{ a.nome }}</h2>
+      <p>{{ a.raca }} · {{ a.idade|br }} anos · {{ 'macho' if a.sexo == 'M' else 'fêmea' }}{{ ', castrado' if a.castrado and a.sexo == 'M' else (', castrada' if a.castrado else '') }}</p>
+      <p>Responsável: <b>{{ a.tutor }}</b></p>
+      <p>Bairro: <b>{{ local(a.bairro) }}</b></p>
+    </div>
+  </div>
+
+  {% if a.avaliado %}
+  {% set f, d, v = a.features, a.detalhes, a.inicio_fim_14 %}
+  {% set media = 'da média dela' if a.sexo == 'F' else 'da média dele' %}
+  <div class="caixa">
+    <h3>Por que este resultado?</h3>
+    <div class="linha"><div class="icone">⚖️</div><div class="texto">Peso: {{ a.peso|br }} kg (ideal: {{ d.faixa_peso[0]|br }}–{{ d.faixa_peso[1]|br }} kg) {{ corr('correlação 1') }}
+      <small>{% if f.desvio_peso > 0 %}{{ (f.desvio_peso * 100)|round|int }}% acima da faixa{% elif f.desvio_peso < 0 %}{{ (-f.desvio_peso * 100)|round|int }}% abaixo da faixa{% else %}dentro da faixa ideal{% endif %}{% if f.peso_x_comida == 1 %} · acima do peso e comendo acima do esperado {{ corr('correlação 4') }}{% elif f.peso_x_comida == -1 %} · abaixo do peso e comendo abaixo do esperado {{ corr('correlação 4') }}{% endif %}{% if f.castrado_perto_limite %} · castrad{{ 'a' if a.sexo == 'F' else 'o' }} e perto do limite da faixa {{ corr('correlação 10') }}{% endif %}</small></div></div>
+    <div class="linha"><div class="icone">🍖</div><div class="texto">Comida: {{ variacao(f.comida_vs_esperado, 'do esperado') }} {{ corr('correlação 2') }}
+      <small>esperado ≈ {{ d.consumo_esperado_comida_g|round|int }} g/dia{{ ' (energia média das rações)' if d.usou_media_racao }} · últimos 3 dias {{ variacao(f.comida_vs_baseline, media) }} {{ corr('correlação 3') }} · {{ tendencia(f.tend_comida, v.comida, ' g') }} {{ corr('correlação 5') }}</small></div></div>
+    <div class="linha"><div class="icone">💧</div><div class="texto">Água: {{ variacao(f.agua_vs_esperado, 'do esperado') }} {{ corr('correlação 2') }}
+      <small>esperado ≈ {{ d.consumo_esperado_agua_ml|round|int }} ml/dia · últimos 3 dias {{ variacao(f.agua_vs_baseline, media) }} {{ corr('correlação 3') }} · {{ tendencia(f.tend_agua, v.agua, ' ml') }} {{ corr('correlação 5') }}</small></div></div>
+    <div class="linha"><div class="icone">🐕</div><div class="texto">Atividade: últimos 3 dias {{ variacao(f.mov_vs_baseline, media) }} {{ corr('correlação 3') }}
+      <small>{{ tendencia(f.tend_mov, v.movimento, '') }} {{ corr('correlação 5') }}</small></div></div>
+    <div class="linha"><div class="icone">🧬</div><div class="texto">Doenças da raça na idade de risco: {{ a.doencas_raca|join(', ') if a.doencas_raca else 'nenhuma' }} {{ corr('correlação 6') }}
+      <small>{% if d.protecoes %}menos comuns na raça: {{ d.protecoes|join(', ') }}{% else %}razão de risco em relação aos animais sem raça definida{% endif %}</small></div></div>
+    <div class="linha"><div class="icone">📅</div><div class="texto">Última consulta: {% if a.dias_sem_consulta is not none %}há {{ a.dias_sem_consulta }} dias{% else %}sem registro{% endif %} {{ corr('correlação 9') }}</div></div>
+    <div class="linha"><div class="icone">💉</div><div class="texto">Vacinas atrasadas: {{ a.vacinas_atrasadas|join(', ') if a.vacinas_atrasadas else 'nenhuma' }} {{ corr('correlação 8') }}
+      {% if a.sem_vacina_regional %}<small>sem a vacina em dia contra doença em alerta no bairro (Vigia C): {{ a.sem_vacina_regional|join(', ')|lower }}</small>{% endif %}</div></div>
+  </div>
+
+  <div class="faixa-aviso {{ a.nivel }}">🛡️ Causa provável: {{ a.causa }} {{ corr('correlação 7') }}</div>
+  {% if a.outras_hipoteses %}<p class="nota">Outras hipóteses: {{ a.outras_hipoteses|join(', ') }}</p>{% endif %}
+  {% if a.sinais %}<p style="margin:0 0 6px;font-weight:600">Sinais identificados</p>
+  <ul style="margin:0 0 12px;padding-left:20px">{% for s in a.sinais %}<li>{{ s }}</li>{% endfor %}</ul>{% endif %}
+  {% else %}
+  <div class="caixa">
+    <h3>Situação</h3>
+    <div class="linha"><div class="icone">⚖️</div><div class="texto">Peso: {{ a.peso|br }} kg</div></div>
+    <div class="linha"><div class="icone">📅</div><div class="texto">Última consulta: {% if a.dias_sem_consulta is not none %}há {{ a.dias_sem_consulta }} dias{% else %}sem registro{% endif %} {{ corr('correlação 9') }}</div></div>
+    <div class="linha"><div class="icone">💉</div><div class="texto">Vacinas atrasadas: {{ a.vacinas_atrasadas|join(', ') if a.vacinas_atrasadas else 'nenhuma' }} {{ corr('correlação 8') }}
+      {% if a.sem_vacina_regional %}<small>sem a vacina em dia contra doença em alerta no bairro: {{ a.sem_vacina_regional|join(', ')|lower }}</small>{% endif %}</div></div>
+  </div>
+  {% endif %}
+
+  {% if a.rotina %}<a class="faixa-aviso info" href="/pacientes?nivel=rotina">📅 Check-up de rotina: mais de 1 ano sem consulta {{ corr('correlação 9') }}</a>{% endif %}
+  {% for r in regionais %}
+  <a class="faixa-aviso {{ r.nivel_risco }}" href="/regional/{{ r.indice }}">📍 {{ r.doenca }} em {{ local(r.bairro) }}: alerta regional {{ 'MÉDIO' if r.nivel_risco == 'MEDIO' else r.nivel_risco }} (Vigia C)</a>
+  {% endfor %}
+
+  <div class="recomendacao"><b>💡 Recomendação para a clínica</b><br>{{ a.recomendacao }}</div>
+
+  <a class="botao" href="/whatsapp/tutor/{{ a.id_animal }}">📱 Ver o que o responsável recebe</a>
+</div>
+
+{% if a.avaliado %}
+<div class="card">
+  <h3>Probabilidade de cada nível (Random Forest)</h3>
+  {% for n in ['ALTO', 'MEDIO', 'BAIXO'] %}
+  <div class="barra"><div class="rotulo"><span>{{ 'MÉDIO' if n == 'MEDIO' else n }}</span><span>{{ (a.probabilidades.get(n, 0) * 100)|round|int }}%</span></div>
+    <div class="fundo"><div class="cheio {{ n }}" style="width: {{ (a.probabilidades.get(n, 0) * 100)|round(1) }}%"></div></div></div>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <h3>Sensor nos últimos {{ a.serie|length }} dias</h3>
+  {% for chave, nome, unidade, cor in [('comida','Comida','g','#1a6fe8'),('agua','Água','ml','#26a3c9'),('movimento','Movimento','índice','#f28c18')] %}
+  {% set valores = a.serie|map(attribute=chave)|list %}
+  <div class="grafico"><div class="rotulo"><span>{{ nome }}</span><span>último: {{ valores[-1]|br(0) }} {{ unidade }}</span></div>
+    <svg viewBox="0 0 300 56" preserveAspectRatio="none"><polyline fill="none" stroke="{{ cor }}" stroke-width="2.5" points="{{ linha_svg(valores) }}"/></svg></div>
+  {% endfor %}
+</div>
+
+<form class="card" method="post" action="/animal/{{ a.id_animal }}/leitura">
+  <h3>Simular nova leitura do sensor</h3>
+  <p class="faixa-aviso info" style="font-weight:400;font-size:13px;margin:6px 0 0;display:block">🧪 Só para teste: em uso real, o ESP32 envia uma leitura por dia.</p>
+  {% set ultima = a.serie[-1] %}
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 10px">
+    <div><label for="comida">Comida (g)</label><input class="campo" id="comida" name="comida" type="number" step="0.1" min="0" value="{{ ultima.comida|round(1) }}" required></div>
+    <div><label for="agua">Água (ml)</label><input class="campo" id="agua" name="agua" type="number" step="0.1" min="0" value="{{ ultima.agua|round(1) }}" required></div>
+    <div><label for="movimento">Movimento (0 a 100)</label><input class="campo" id="movimento" name="movimento" type="number" step="0.1" min="0" max="100" value="{{ ultima.movimento|round(1) }}" required></div>
+    <div><label for="dias">Quantos dias</label><input class="campo" id="dias" name="dias" type="number" min="1" max="7" value="3" required></div>
+  </div>
+  <button class="botao" type="submit">Registrar leituras e executar a IA</button>
+</form>
+{% endif %}
+{% endblock %}
