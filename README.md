@@ -3,6 +3,10 @@
 > Sistema de gestão veterinária centralizada para acompanhamento contínuo da
 > saúde de animais, utilizando IoT, IoB & Generative IA
 
+![Ilustração dos dispositivos Clyvo](imagens/capa.png)
+
+*Ilustração conceitual dos dispositivos IoT da Clyvo: coleira com ESP32 + MPU6050 (movimento) e comedouro com ESP32 + HX711 (comida e água).*
+
 ## Pitch do Projeto
 
 [Assista ao Pitch do Projeto](LINK)
