@@ -436,18 +436,45 @@ A Clyvo Vet é desenvolvida em módulos, em paralelo, um por disciplina: o siste
 
 A IA funciona de forma **transparente para o usuário**: ela roda sozinha quando a aplicação abre e de novo a cada dado novo (uma leitura do sensor ou um diagnóstico), e a clínica e o responsável só veem o resultado já explicado. A cada execução, os alertas anteriores passam para `RESOLVIDO` e os novos entram como `ATIVO`, então a tabela guarda o histórico.
 
-| Tela | O que mostra |
-|---|---|
-| **Início** | Número de animais em risco alto e médio, alertas regionais ativos e os pacientes que precisam de atenção primeiro |
-| **Pacientes** | Lista ordenada por risco, com filtros (risco alto, médio, baixo, check-up atrasado, filhotes e SRD) |
-| **Alerta individual** (visão da clínica) | Nível de risco e confiança do Random Forest; quadro "Por que este resultado?", com cada dado ligado à sua correlação; causa provável e outras hipóteses; recomendação para a clínica; probabilidade de cada nível; gráficos de 30 dias do sensor |
-| **Alerta regional** (visão da clínica) | Casos × média histórica, z-score, confirmação do Isolation Forest, pacientes do bairro, recomendação para a clínica e lista dos animais sem a vacina em dia, para avisar primeiro |
-| **WhatsApp** (visão do responsável) | Lista de conversas, uma por tutor, com etiquetas: 🚨 **sanitário** (Vigia C, enviado a todos os tutores do bairro), 🐾 **saúde** (Vigia B) e 📅 **check-up** (correlação 9). As mensagens são em linguagem simples, e o envio é simulado |
-| **Registrar diagnóstico** | Grava um diagnóstico no Oracle e executa a IA de novo |
+O mesmo resultado aparece para dois públicos: a **clínica** vê a explicação técnica, e o **responsável** recebe só o que precisa saber e o próximo passo, sem termos técnicos. As telas abaixo são da aplicação rodando com o banco Oracle.
 
-O mesmo resultado aparece para dois públicos: a **clínica** vê a explicação técnica, e o **responsável** recebe só o que precisa saber e o próximo passo, sem termos técnicos.
+**Início (visão da clínica)**
 
-**Cenários de teste (validação em uso):** a simulação de leitura do sensor e o registro de diagnóstico existem só para testar a IA nesta demonstração, e as duas telas mostram o aviso "🧪 Só para teste". Em uso real, as leituras chegam do ESP32 pela API (seção 7), e os diagnósticos são registrados pela clínica no sistema principal, nas mesmas tabelas do Oracle.
+![Início](imagens/inicio.png)
+
+Resume a última execução da IA: 48 animais em risco alto, 17 em risco médio e 5 alertas regionais (a raiva no Butantã gera um alerta para os cães e outro para os gatos). Logo abaixo vêm os pacientes que precisam de atenção primeiro, já com a causa provável. A tela **Pacientes** lista todos os animais por risco, com filtros (alto, médio, baixo, check-up atrasado, filhotes e SRD).
+
+**Alerta individual: Mel (Vigia B)**
+
+![Alerta individual da Mel](imagens/animal.png)
+
+Por que o risco é ALTO: o peso da Mel está dentro da faixa ideal, mas ela é uma Golden de 8 anos, raça com 4,4 vezes mais chance de hipotireoidismo, já na idade em que a doença fica comum, e a atividade caiu 46% em relação à média dela, em queda há 2 semanas (de 42 para 23). Nenhum sinal sozinho seria conclusivo; juntos, o Random Forest dá 98% de confiança no risco ALTO. A tela liga cada dado à sua correlação, mostra a causa provável, a outra hipótese (artrose), a recomendação para a clínica e os gráficos de 30 dias do sensor.
+
+**Alerta regional: cinomose na Lapa (Vigia C)**
+
+![Alerta regional da Lapa](imagens/regional.png)
+
+Por que o alerta é ALTO: foram 8 casos de cinomose em 14 dias, onde o normal do bairro é 0,2 (z = 15,7), e o Isolation Forest, sem nenhuma regra da equipe, também marcou a quinzena como anormal. A recomendação para a clínica é avisar primeiro os tutores dos 8 cães sem a vacina em dia, que aparecem listados na própria tela.
+
+**O que o responsável recebe (WhatsApp, envio simulado)**
+
+![Lista de conversas do WhatsApp](imagens/whatsapp_lista.png)
+
+Cada conversa é com um tutor e reúne as mensagens de todos os animais dele. As etiquetas mostram o tipo: 🚨 **sanitário** (Vigia C, enviado a todos os tutores do bairro por lista de transmissão), 🐾 **saúde** (Vigia B, risco alto ou médio) e 📅 **check-up** (mais de 1 ano sem consulta, correlação 9).
+
+<img src="imagens/whatsapp_saude.png" alt="Alerta de saúde da Mel" width="360">
+
+**Saúde (Mel):** o mesmo alerta da tela da clínica, em linguagem simples. A responsável fica sabendo do sinal (atividade abaixo do normal), do que ele pode indicar (hipotireoidismo) e do próximo passo (agendar consulta), sem termos técnicos.
+
+<img src="imagens/whatsapp_sanitario.png" alt="Alerta sanitário da Lapa" width="360">
+
+**Sanitário (Lapa):** vai para os 40 tutores de cães do bairro, porque a cinomose afeta cães. A mensagem avisa do aumento de casos e diz o que fazer: verificar a carteira de vacinação, evitar contato com animais doentes e procurar o veterinário se houver sintomas.
+
+<img src="imagens/whatsapp_checkup.png" alt="Check-up da Ozzy e alerta de saúde da Toby" width="360">
+
+**Check-up e saúde na mesma conversa (Fernanda Santos):** a Ozzy está há mais de 1 ano sem consulta e recebe o lembrete de check-up, mesmo sem sinais de problema. A Toby, da mesma tutora, está comendo menos e se movimentando menos, sinais que juntos indicam atenção para hipoadrenocorticismo. As duas mensagens chegam na mesma conversa, porque são da mesma responsável.
+
+**Cenários de teste (validação em uso):** a simulação de leitura do sensor e o registro de diagnóstico existem só para testar a IA nesta demonstração, e as duas telas mostram o aviso "🧪 Só para teste". Em uso real, as leituras chegam do ESP32 pela API (seção 7), e todos os cadastros (animais, consultas, vacinas e diagnósticos) são feitos pela clínica no sistema principal da Clyvo (Java), nas mesmas tabelas do Oracle.
 
 | Cenário | O que acontece |
 |---|---|
@@ -466,11 +493,6 @@ O mesmo resultado aparece para dois públicos: a **clínica** vê a explicação
 | `GET /api/alertas/regionais` | Alertas regionais ativos, com z-score, confirmação do Isolation Forest, recomendação para a clínica e orientação para o tutor |
 | `POST /api/leituras` | Recebe uma leitura diária no formato do ESP32 e devolve o risco atualizado |
 | `POST /api/avaliar` | Executa os dois vigias de novo com os dados do banco |
-
-![Início](imagens/inicio.png)
-![Alerta individual](imagens/animal.png)
-![Alerta regional](imagens/regional.png)
-![WhatsApp do tutor](imagens/whatsapp.png)
 
 ### 10.4 O que é real e o que é simulado nesta entrega
 
