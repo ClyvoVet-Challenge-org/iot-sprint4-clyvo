@@ -9,7 +9,7 @@
 
 ## Pitch do Projeto
 
-[Assista ao Pitch do Projeto](LINK)
+[![Assista ao Pitch do Projeto](https://img.youtube.com/vi/mDt0J5Usft4/0.jpg)](https://www.youtube.com/watch?v=mDt0J5Usft4)
 
 ---
 
